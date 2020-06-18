@@ -1,0 +1,49 @@
+<style>
+
+	#si{
+		background: #7cd1f9;
+		color:white;
+    margin: 0 5px 0 0;
+    width: 70px
+
+
+	}
+	#no{
+		background:#f97c95;
+
+	}
+</style>
+
+	{{extend 'layout1.html'}}
+
+{{block header}}
+    <h2>Página de Inicio</h2>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="{{=URL(c='default',f='index')}}">Home</a>
+      </li>
+      <li class="breadcrumb-item active">
+        <strong>Listado de Cadetes</strong>
+      </li>
+    </ol>
+{{end}}
+
+    <div class="row">
+        <div class="swal-overlay swal-overlay--show-modal" tabindex="-1">
+        <div class="swal-modal" role="dialog" aria-modal="true"><div class="swal-text" style=""><h4><strong>El cadete no pose notas medicas ¿Deseas Ingresar una Nota Médica?</strong></h4></div><div class="swal-footer"><div class="swal-button-container">
+            <div class="btn-group" >
+
+              <div class="row">
+    
+                <a href="{{=URL('medica', 'ingreso',args=dni)}}" class="swal-button swal-button--cancel"id="si" >Si </a>       
+
+        
+                <a href="{{=URL('medica', 'medica')}}" class="swal-button swal-button--confirm"id="no">No </a>
+              </div>   
+         
+            </div>
+
+
+    </div>
+  </div>
+  </div>

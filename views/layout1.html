@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<script src="{{=URL('static', 'assets/js/swit-alert.js') }}"></script> 
+<script src="{{=URL('static', 'js/jquery-3.2.1.js') }}"></script>
+<script src="{{=URL('static', 'vue.js') }}"></script>
+
+
+
+<!-- Mirrored from webapplayers.com/inspinia_admin-v2.8/empty_page.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 Jun 2018 13:54:48 GMT -->
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Policía de Catamarca | Sistema Escuela de Cadetes </title>
+
+    <link href="{{=URL('static', 'assets/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{=URL('static', 'assets/font-awesome/css/font-awesome.css' ) }}" rel="stylesheet">
+
+    <link href="{{=URL('static', 'assets/css/plugins/dataTables/datatables.min.css') }}" rel="stylesheet">
+
+    <link href="{{=URL('static', 'assets/css/animate.css' ) }}" rel="stylesheet">
+    <link href="{{=URL('static', 'assets/css/style.css' ) }}" rel="stylesheet">
+
+</head>
+
+<body class="">
+
+    <div id="wrapper">
+
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav metismenu" id="side-menu">
+                <li class="nav-header">
+                    <div class="dropdown profile-element">
+                        <img alt="image" class="rounded-circle" src="{{=URL('static', 'assets/img/user.png')}}"/>
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="block m-t-xs font-bold"></span>
+                            <span class="text-muted text-xs block"> {{=str.upper(auth.user.first_name)}}&nbsp;<b class="caret"></b></span>
+                        </a>
+                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                            <li><a class="dropdown-item" href="profile.html">{{=str.upper(auth.user.first_name)}}</a></li>
+                            <li><a class="dropdown-item" href="contacts.html">Cambiar Contraseña</a></li>
+                            
+                            <li class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="{{=URL('default', 'user', args=('logout'))}}">Salir</a></li>
+                        </ul>
+                    </div>
+                    <div class="logo-element">
+                        D4
+                    </div>
+                </li>
+               
+               {{if auth.user.Escuela == 'Super' :}} 
+                  <li>
+                        <a href="#"><i class="fa fa-male fa"></i> <span class="nav-label"> Escuela de Cadetes</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+
+
+                            <li>
+                                <a href="#" id="damian"><i class="fa fa-laptop"></i>Nuevo cadete <span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li><a href="{{=URL('nuevo', 'check')}}">Nuevo Cadete</a></li>
+                                    
+                                    
+                                </ul>
+                            </li>
+                            <li><a href="#"><i class="fa fa-folder-open"></i>Certificados medicos<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li><a href="{{=URL('medica', 'medica')}}">Certificados medicos</a></li>
+                                    
+
+                                </ul>
+                            </li>
+                            
+                            <li>
+                                <a href="#"><i class="fa fa-newspaper-o"></i>Sanciones<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li><a href="{{=URL('sanciones', 'listado')}}">Sanciones</a></li>
+                                    
+                                    
+
+                                </ul>
+                            </li>
+                            
+    
+                            <li>
+                                <a href="#"><i class="fa fa-newspaper-o"></i>Estadisticas<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li><a href="{{=URL('estadisticas', 'menu')}}">Estadisticas</a></li>
+                                    
+                                    
+
+                                </ul>
+                            </li>
+                           
+
+                            <li>
+                                <a href="#"><i class="fa fa-newspaper-o"></i>Usuarios<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li><a href="{{=URL('usuario', 'usuario')}}">Usuarios</a></li>
+                                    
+                                    
+
+                                </ul>
+                            </li>
+                            
+                           
+                        </ul>
+                    </li>
+                {{pass}}
+               
+
+                
+
+                {{if auth.user.Escuela == 'Super' or auth.user.Escuela == 'Esc_de_cadetes':}}
+
+                <li>
+                        <a href="#"><i class="fa fa-male fa"></i> <span class="nav-label"> Escuela de Cadetes</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+
+
+                            <li>
+                                <a href="#" id="damian"><i class="fa fa-laptop"></i>Nuevo cadete <span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li><a href="{{=URL('nuevo', 'check')}}">Nuevo Cadete</a></li>
+                                    
+                                    
+                                </ul>
+                            </li>
+                            <li><a href="#"><i class="fa fa-folder-open"></i>Certificados medicos<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li><a href="{{=URL('medica', 'medica')}}">Certificados medicos</a></li>
+                                    
+
+                                </ul>
+                            </li>
+                            
+                            <li>
+                                <a href="#"><i class="fa fa-newspaper-o"></i>Sanciones<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li><a href="{{=URL('sanciones', 'listado')}}">Sanciones</a></li>
+                                    
+                                    
+
+                                </ul>
+                            </li>
+                            
+    
+                            <li>
+                                <a href="#"><i class="fa fa-newspaper-o"></i>Estadisticas<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li><a href="{{=URL('estadisticas', 'menu')}}">Estadisticas</a></li>
+                                    
+                                    
+
+                                </ul>
+                            </li>
+                           
+
+                            <li>
+                                <a href="#"><i class="fa fa-newspaper-o"></i>Usuarios<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li><a href="{{=URL('usuario', 'usuario')}}">Usuarios</a></li>
+                                    
+                                    
+
+                                </ul>
+                            </li>
+                            
+                           
+                        </ul>
+                    </li>
+                {{pass}}
+
+            </ul>
+
+        </div>
+    </nav>
+
+        <div id="page-wrapper" class="gray-bg">
+        <div class="row border-bottom">
+        <nav class="navbar navbar-static-top  " role="navigation" style="margin-bottom: 0">
+
+        <div class="navbar-header">
+         <!--   <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a> -->
+           
+        </div> 
+
+            <ul class="nav navbar-top-links navbar-right ">
+              
+
+                <li>
+                    <a href="{{=URL('default', 'user', args=('logout'))}}">
+                        <i class="fa fa-sign-out "></i> Cerrar Sesión
+                    </a>
+                </li>
+            </ul>
+
+        </nav>
+        </div>
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-sm-12">
+                    {{block header}}
+
+                    {{end}}
+
+                   
+                </div>
+                
+            </div>
+
+
+            <div class="wrapper wrapper-content">
+               {{include}}
+            </div>
+            <div class="footer">
+                <div class="float-right">
+                    <strong>Copyright</strong> Div. Informática Dpto. Investigaciones Judiciales D-5 <strong>&copy;</strong> 2019
+                </div>
+                
+            </div>
+
+        </div>
+        </div>
+
+    <!-- Mainly scripts -->
+    
+    
+    <script src="{{=URL('static', 'assets/js/popper.min.js') }}"></script>
+    <script src="{{=URL('static', 'assets/js/bootstrap.js') }}"></script>
+    <script src="{{=URL('static', 'assets/js/plugins/metisMenu/jquery.metisMenu.js') }}"></script>
+    <script src="{{=URL('static', 'assets/js/plugins/slimscroll_DA_PROBLEMAS/jquery.slimscroll.min.js') }}"></script>
+
+    <script src="{{=URL('static', 'assets/js/plugins/dataTables/datatables.min.js') }}"></script>
+    <script src="{{=URL('static', 'assets/js/plugins/dataTables/dataTables.bootstrap4.min.js') }}"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="{{=URL('static', 'assets/js/inspinia.js') }}"></script>
+    <script src="{{=URL('static', 'assets/js/plugins/pace/pace.min.js') }}"></script>
+    <script src="{{=URL('static', 'assets/js/plugins/typehead/bootstrap3-typeahead.min.js') }}"></script>
+    
+
+
+   
+
+</body>
+
+
+<!-- Mirrored from webapplayers.com/inspinia_admin-v2.8/empty_page.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 Jun 2018 13:54:48 GMT -->
+</html>

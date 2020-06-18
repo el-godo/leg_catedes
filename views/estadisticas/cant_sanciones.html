@@ -1,0 +1,153 @@
+
+{{extend 'layout1.html'}}
+{{block header}}
+<h2>Policía de Catamarca | Sistema Escuela de Cadetes</h2>
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a href="{{=URL(c='default',f='index')}}">Home</a>
+    </li>
+    <li class="breadcrumb-item active">
+        <strong> Form</strong>
+    </li>
+</ol>
+{{end}}
+
+<style>
+	
+	#aceptar{
+		background: #d24040;
+		color:white;	
+
+	}
+	#icono2{
+		background: #d24040;
+
+	}
+	#icono1{
+		background: #d24040;
+
+	}
+	#icono4{
+		border-color: #d24040;
+
+	}
+	#icono3{
+	
+	
+    border-color: #e63e13;}
+
+
+</style>
+	{{extend 'layout1.html'}}
+	{{block header}}
+    
+{{end}}
+
+
+
+
+{{for x in set_sanciones:}}
+	{{tomo_id=x.id}}			<!--tomo el id del registo-->
+
+	{{comp_anio= x.fecha.year}}  <!--fecha del año del regisro-->
+
+	{{comp_mes= x.fecha.month}} <!--fecha del mes del regisro-->
+	
+
+	
+	{{if hoy_anio == comp_anio:}} <!--pregunto si el año es el del año actual-->
+		
+		{{int(x.dias)}} <!-- paso a enteros-->
+		
+
+
+
+
+		{{csa=x.dias + csa}} <!-- acumulador de sanciones en el año-->
+
+		
+		
+
+		{{if hoy_mes == comp_mes :}} <!-- pregunto si el registro corresponde al ultimo mes-->
+
+			{{int(x.dias)}}    <!-- paso a enteros-->
+
+			{{csm=x.dias + csm}}  <!-- acumulador de sanciones en el mes-->
+
+			
+		{{pass}}
+
+	{{pass}}
+
+	<br>
+
+	
+{{pass}}
+
+
+
+
+
+
+
+
+               
+            </div><div class="swal-overlay swal-overlay--show-modal" tabindex="-1">
+  <div class="swal-modal" role="dialog" aria-modal="true"><div class="swal-icon swal-icon--warning" id="icono4">
+    <span class="swal-icon--warning__body" id="icono2">
+      <span class="swal-icon--warning__dot"id="icono1"></span>
+    </span>
+  </div><div class="swal-title" style="" id="icono3">ATENCIÒN</div><div class="swal-text" style="">
+  	<h3> Total de Sanciones en el Año 
+<span class="label label-danger">{{=csa}}  </span>   días de arresto</h3>	
+
+<h3> Total de Sanciones en el Mes <span class="label label-danger">{{=csm}} 
+</span> días de arresto</h3>	
+  		
+  </div><div class="swal-footer"><div class="swal-button-container">
+
+    <a href="javascript:history.back()"class="swal-button swal-button--cancel" tabindex="0" id="aceptar">Aceptar</a>
+
+    <div class="swal-button__loader">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+
+ 
+
+  </div></div></div></div>
+
+
+
+        
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
+

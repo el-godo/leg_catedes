@@ -1,0 +1,106 @@
+
+{{extend 'layout1.html'}}
+{{block header}}
+<h2>Policía de Catamarca | Sistema Escuela de Cadetes</h2>
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a href="{{=URL(c='default',f='index')}}">Home</a>
+    </li>
+    <li class="breadcrumb-item active">
+        <strong> Form</strong>
+    </li>
+</ol>
+{{end}}
+
+<style>
+	
+	#aceptar{
+		background: #d24040;
+		color:white;	
+
+	}
+	#icono2{
+		background: #d24040;
+
+	}
+	#icono1{
+		background: #d24040;
+
+	}
+	#icono4{
+		border-color: #d24040;
+
+	}
+	#icono3{
+	
+	
+    border-color: #e63e13;}
+
+
+</style>
+	{{extend 'layout1.html'}}
+	{{block header}}
+    
+{{end}}
+
+
+{{for x in set_medicas:}}
+	{{tomo_id=x.id}}			<!--tomo el id del registo-->
+
+	{{comp_anio= x.fecha.year}}  <!--fecha del año del regisro-->
+
+	{{comp_mes= x.fecha.month}} <!--fecha del mes del regisro-->
+	{{if hoy_anio == comp_anio:}} <!--pregunto si el año es el del año actual-->
+		{{="si"}}
+		{{dias=int(x.reposo)}} <!-- paso a enteros-->
+		{{cna=dias + cna}} <!-- acumulador de notas medicas en el año-->
+
+		{{if x.t_reposo== "ABSOLUTO" :}}          <!--pregunto si la nota es absoluta -->
+			{{abs_a=dias+abs_a}}  <!--acumula las notas medicas de reposo absoluto del año-->
+		
+			{{="absoluto"}}
+
+			{{else:}}
+			{{rl_a=dias+rl_a}}
+			{{="RELATIVO"}}
+
+		{{pass}}
+	{{pass}}		
+
+	{{if hoy_mes == comp_mes :}} <!-- pregunto si el registro corresponde al ultimo mes-->	
+
+	{{anmm=dias+anmm}}  <!--acumulo la cantidad de notas medicas por mes-->
+		{if x.t_reposo== "ABSOLUTO" :}}          <!--pregunto si la nota es absoluta -->
+		{{anra_m=dias+anra_m}}
+		{{else:}}
+
+		{{pass}}
+
+
+
+
+
+		
+	{{pass}}
+		
+	
+		
+{{pass}}	
+
+{{=set_medicas}}
+{{=hoy_anio}}
+{{=comp_anio}}
+{{=cna}}
+
+
+{{=arl_a}}
+
+
+
+
+
+
+
+
+
+
