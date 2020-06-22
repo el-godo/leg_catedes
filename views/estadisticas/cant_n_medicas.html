@@ -51,17 +51,16 @@
 
 	{{comp_mes= x.fecha.month}} <!--fecha del mes del regisro-->
 	{{if hoy_anio == comp_anio:}} <!--pregunto si el año es el del año actual-->
-		{{="si"}}
+		
 		{{dias=int(x.reposo)}} <!-- paso a enteros-->
 		{{cna=dias + cna}} <!-- acumulador de notas medicas en el año-->
 
 		{{if x.t_reposo== "ABSOLUTO" :}}          <!--pregunto si la nota es absoluta -->
-			{{abs_a=dias+abs_a}}  <!--acumula las notas medicas de reposo absoluto del año-->
-		
-			{{="absoluto"}}
+			{{abs_a=dias+abs_a}}  <!--acumula las notas medicas de reposo absoluto del año-->		
+			
 
 			{{else:}}
-			{{rl_a=dias+rl_a}}
+			{{arl_a=dias+arl_a}}
 			{{="RELATIVO"}}
 
 		{{pass}}
@@ -69,15 +68,19 @@
 
 	{{if hoy_mes == comp_mes :}} <!-- pregunto si el registro corresponde al ultimo mes-->	
 
-	{{anmm=dias+anmm}}  <!--acumulo la cantidad de notas medicas por mes-->
+		{{anmm=dias+anmm}}  <!--acumulo la cantidad de notas medicas por mes-->
 		{if x.t_reposo== "ABSOLUTO" :}}          <!--pregunto si la nota es absoluta -->
-		{{anra_m=dias+anra_m}}
-		{{else:}}
+
+			{{anra_m= dias+anra_m}} <!-- acumulo las notas r absoluto del mes-->
 
 		{{pass}}
+		{if x.t_reposo== "RELATIVO" :}}  
+			{{=anrr_m}}
+			{{=dias}}
+			{{anrr_m= dias+anrr_m}} <!-- acumulo las notas r relativo del mes-->
+			{{=anrr_m}}
 
-
-
+		{{pass}}
 
 
 		
@@ -87,13 +90,55 @@
 		
 {{pass}}	
 
-{{=set_medicas}}
-{{=hoy_anio}}
-{{=comp_anio}}
-{{=cna}}
+
+               
+            </div><div class="swal-overlay swal-overlay--show-modal" tabindex="-1">
+  <div class="swal-modal" role="dialog" aria-modal="true"><div class="swal-icon swal-icon--warning" id="icono4">
+    <span class="swal-icon--warning__body" id="icono2">
+      <span class="swal-icon--warning__dot"id="icono1"></span>
+    </span>
+  </div><div class="swal-title" style="" id="icono3">Cantidad de dias Notas Medicas por :</div><div class="swal-text" style="">
+  	<h3> Total por Año 
+<span class="label label-danger"> {{=cna}} </span>  </h3>	
+
+<h3> Total Por Reposo Absoluto por Año 
+<span class="label label-danger"> {{=abs_a}} </span>  </h3>	
 
 
-{{=arl_a}}
+<h3> Total Por Reposo Relativo por Año  <span class="label label-danger">{{=arl_a}}
+</span> </h3>	
+<br>
+<br>
+<h3> Total En el Ultimo Mes
+
+<span class="label label-danger"> {{=anmm}} </span>  </h3>	
+
+<h3> Total en Reposo Absoluto En el Ultimo Mes :
+<span class="label label-danger"> {{=anra_m}} </span>  </h3>	
+
+
+<h3> Total en Reposo Relativo En el Ultimo Mes  <span class="label label-danger">{{=anrr_m}}
+</span> </h3>	
+  		
+  </div><div class="swal-footer"><div class="swal-button-container">
+
+    <a href="javascript:history.back()"class="swal-button swal-button--cancel" tabindex="0" id="aceptar">Aceptar</a>
+
+    <div class="swal-button__loader">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+
+ 
+
+  </div></div></div></div>
+  {{=set_medicas}}
+
+
+
+        
+        
 
 
 

@@ -57,13 +57,9 @@ def cant_n_medicas():
 	anrr_m=0 #acumulador de notas medicas reposo absoluto en el mes
 
 
-	
-
-
-
 
 	return dict(set_medicas=set_medicas,hoy_anio=hoy_anio,hoy_mes=hoy_mes,comp_anio=comp_anio,cna=cna,abs_a=abs_a,arl_a=arl_a,
-		anmm=anmm,anra_m=anra_m,anrr_m=anrr_m)
+		anmm=anmm,anra_m=anra_m,anrr_m=anrr_m,)
 
 
 	
@@ -78,7 +74,4 @@ def cant_n_medicas():
 
 
 
-
-	return dict(set_sanciones=set_sanciones,fecha=fecha,hoy_anio=hoy_anio,hoy_mes=hoy_mes,
-		a=a,csm=csm,csa=csa,smga=smga,smgm=smgm,csea=csea,csem=csem)
 
