@@ -1,0 +1,117 @@
+{{extend 'layout1.html'}}
+{{block header}}
+<h2>Policía de Catamarca | Sistema Escuela de Cadetes</h2>
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a href="{{=URL(c='default',f='index')}}">Home</a>
+    </li>
+    <li class="breadcrumb-item active">
+        <strong> Form</strong>
+    </li>
+</ol>
+{{end}}
+{{for x in set_leg:}}
+	{{curso=x.curso}}
+	{{formacion=x.formacion}}
+	{{estado=x.estado}}
+	
+
+
+	{{if formacion== "Esc. Cadetes":}}<!-- pregunto si pertenece a la escuela de cadetes-->
+		
+		{{if x.curso =="1":}}		<!-- pregunto si es de primer año de 1 año-->
+			{{if estado=="BAJA":}}<!-- pregunto por dados de baja de 1 año-->
+				{{p1b=p1b+1}}
+			{{pass}}
+
+			{{if estado=="ACTIVO":}} <!-- pregunto por activos de 1 año-->
+
+			{{p1= p1+1}}<!-- contador total de 1 escuela de policia-->
+			{{pass}}
+		{{pass}}
+
+		{{if x.curso=="2":}} 	<!-- pregunto si es de primer año de 2 año-->
+			{{if estado=="BAJA":}}<!-- pregunto por dados de baja de 2 año-->
+				{{p2b=p2b+1}}
+				
+			{{pass}}
+			{{if estado=="ACTIVO":}} <!-- pregunto por activos de 1 año-->
+			{{p2= p2+1}}<!-- contador total de 2 año escuela de policia-->
+			{{pass}}
+		{{pass}}
+		{{if x.curso=="3":}}
+			{{if estado=="BAJA":}}<!-- pregunto por dados de baja de 2 año-->
+				{{p3b=p3b+1}}
+			{{pass}}
+
+			{{if estado=="ACTIVO":}} <!-- pregunto por activos de 1 año-->
+			{{p3= p3+1}}<!-- contador total de 2 año escuela de policia-->
+			{{pass}}		
+			
+		{{pass}}
+	{{pass}}	
+	{{if formacion== "S.Penitenciario":}} <!-- pregunto si pertenece a la esc. del servicio -->
+		{{if x.curso=="1":}}		<!-- pregunto si es de primer año de 1 año-->
+			{{if estado=="BAJA":}}<!-- pregunto por dados de baja de 1 año-->
+				{{s1b=s1b+1}}
+			{{pass}}
+
+			{{if estado=="ACTIVO":}} <!-- pregunto por activos de 1 año-->
+			{{s1= s1+1}}<!-- contador total de 1 escuela de policia-->
+			{{pass}}
+		{{pass}}
+
+		{{if x.curso=="2":}} 	<!-- pregunto si es de primer año de 2 año-->
+			{{if estado=="BAJA":}}<!-- pregunto por dados de baja de 2 año-->
+				{{s2b=s2b+1}}
+				
+			{{pass}}
+			{{if estado=="ACTIVO":}} <!-- pregunto por activos de 1 año-->
+			{{s2= s2+1}}<!-- contador total de 2 año escuela de policia-->
+			{{pass}}
+		{{pass}}
+
+		{{if x.curso=="3":}}
+			{{if estado=="BAJA":}}<!-- pregunto por dados de baja de 2 año-->
+				{{s3b=s3b+1}}
+			{{pass}}
+
+			{{if estado=="ACTIVO":}} <!-- pregunto por activos de 1 año-->
+			{{s3= s3+1}}<!-- contador total de 2 año escuela de policia-->
+			{{pass}}		
+			
+		{{pass}}
+
+
+
+	{{pass}}
+
+
+{{pass}}
+
+<h3>total de inscriptos en el establecimiento: </h3>
+{{te=p1b+p1+p2b+p2+p3b+p3+s1b+s1+s2b+s2+s3b+s3}}
+{{=te}}
+<h3>Total DE Alumnos en el Establecimiento : <h2>{{ta=p1+p2+p3+s1+s2+s3}} {{=ta}}</h2></h3>
+
+
+<h3> total de cadetes activos en la escuela de policia de Primer Año <h2> <span>{{=p1}}</span></h2></h3>
+
+<h3> total de cadetes Dados de baja en la escuela de policia de Primer Año <h2> <span>{{=p1b}}</span></h2></h3>
+
+
+<h3> total de cadetes activos en la escuela de policia de Segundo  Año <h2>{{=p2}}</h2></h3>
+<h3> total de cadetes Dados de baja en la escuela de policia de Segundo Año <h2> <span>{{=p2b}}</span></h2></h3>
+
+<h3> total de cadetes activos en la escuela de policia de Tercer  Año <h2> {{=p2}}</h2></h3>
+<h3> total de cadetes Dados de baja en la escuela de policia de Tercer  Año <h2> <span>{{=p3b}}</span></h2></h3>
+
+
+<h3> total de cadetes activos en la escuela del Servicio Penitenciario de Primer Año <h2> <span>{{=s1}}</span></h2></h3>
+<h3> total de cadetes Dados de baja en la escuela del Servicio Penitenciario de Primer Año <h2> <span>{{=s1b}}</span></h2></h3>
+
+<h3> total de cadetes activos en la escuela del Servicio Penitenciario de Segundo Año <h2> <span>{{=s2}}</span></h2></h3>
+<h3> total de cadetes Dados de baja en la escuela del Servicio Penitenciario de Segundo Año <h2> <span>{{=s2b}}</span></h2></h3>
+
+<h3> total de cadetes activos en la escuela del Servicio Penitenciario de Tercer  Año <h2> <span>{{=s3}}</span></h2></h3>
+<h3> total de cadetes Dados de baja en la escuela del Servicio Penitenciario de Tercer  Año <h2> <span>{{=s3b}}</span></h2></h3>
