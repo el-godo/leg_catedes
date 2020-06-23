@@ -23,9 +23,9 @@ def modificar():
 	formacion=set_leg.formacion
 	aler=set_leg.alergias
 	estado=set_leg.estado
+	genero=set_leg.genero
+
 	###########creo el formulario############################
-
-
 
 	form=SQLFORM.factory(
 	
@@ -33,7 +33,8 @@ def modificar():
 			requires=[IS_MATCH('^[0-9\s]+$',error_message="Ingrese el DNI"),
 			IS_LENGTH(8),
 			IS_NOT_EMPTY()],default=dni),		
-    Field('cuil',requires=[IS_UPPER(),IS_NOT_EMPTY(error_message='El campo no  puede estar vacio')],default=cuil),			
+    Field('cuil',requires=[IS_UPPER(),IS_NOT_EMPTY(error_message='El campo no  puede estar vacio')],default=cuil),	
+    Field('genero',label='genero',requires=IS_IN_SET(["Masculino","Femenino"],error_message='Debe Elegir el Genero'),default=genero), 		
     Field('apellido',requires=[IS_UPPER(),IS_NOT_EMPTY(error_message='El campo no  puede estar vacio')],default=apellido),
     Field('nombre',requires=[IS_UPPER(),IS_NOT_EMPTY(error_message='El campo no  puede estar vacio')],default=nombre),
     Field('domicilio',requires=IS_UPPER(),default=domicilio),
@@ -50,15 +51,14 @@ def modificar():
     Field('formacion',label='Formacion',requires=IS_IN_SET(["Esc. Cadetes","S.Penitenciario"],
     	error_message='Error elija a que formacion pertenece'),default=formacion),
     Field('alergias','text',default=aler), 
-    Field('estado',label='Estado',requires=IS_IN_SET(["ACTIVO","INACTIVO","BAJA"],error_message='Error elija el estado'),default=estado),
+    Field('estado',label='Estado',requires=IS_IN_SET(["ACTIVO","BAJA POR SACIONES","BAJA VONLUNTARIA","RECIBIDO"],error_message='Error elija el estado'),default=estado),
     	) 
 	if form.accepts(request,session):
 		set_leg.update_record(dni=form.vars.dni,cuil=form.vars.cuil,apellido=form.vars.apellido,nombre=form.vars.nombre,
 				domicilio=form.vars.domicilio,f_nacimiento=form.vars.f_nacimiento,g_sanguineo=form.vars.g_sanguineo,curso=form.vars.curso,
 				f_ingreso=form.vars.f_ingreso,celu=form.vars.celu,fijo=form.vars.fijo,tutor=form.vars.tutor,tel_tutor=form.vars.tel_tutor,
-				formacion=form.vars.formacion,aler=form.vars.alergias,estado=form.vars.estado)	
-
-
+				formacion=form.vars.formacion,aler=form.vars.alergias,estado=form.vars.estado,genero=form.vars.genero)
+		
     		response.flash = 'formulario aceptado'
     		redirect(URL(c='modificar',f='modificado',args=dni))
     	elif form.errors:
@@ -68,6 +68,7 @@ def modificar():
 	
 
 	return dict(form=form,set_leg=set_leg)
+
 def modificado():
 	dni=request.args[0]
 

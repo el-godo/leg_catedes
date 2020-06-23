@@ -147,7 +147,7 @@ db.define_table('legajo',
                   uploadfolder=URL('static','fotos')),
     Field('dni','integer'),       
     Field('cuil'),
-    Field('sexo',label='genero',requires=IS_IN_SET(["Masculino","Femenino"]),),
+    Field('genero',label='genero',requires=IS_IN_SET(["Masculino","Femenino"]),),
     Field('apellido',requires=IS_UPPER()),
     Field('nombre',requires=IS_UPPER()),
     Field('domicilio',requires=IS_UPPER()),
@@ -180,6 +180,8 @@ db.define_table('sanciones',
     Field('fecha_cumpli','datetime'),
     Field('visacion',requires=IS_UPPER()),
     )
+
+
 db.define_table('n_medicas',
     Field('dni','integer'),
     Field('apellido',requires=IS_UPPER()),
@@ -193,10 +195,7 @@ db.define_table('n_medicas',
 
 )
 
-db.define_table('muestra',
-    Field('cant_ingreso','integer'),
-    Field('cant_baja','integer'),
-    )
+
 
 #------------------------------------------------
 #---------------Validadores------------------------

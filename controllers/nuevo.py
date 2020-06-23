@@ -58,13 +58,14 @@ def form():
             requires=[IS_MATCH('^[0-9\s]+$',error_message="Ingrese el DNI"),
             IS_LENGTH(8),
             IS_NOT_EMPTY()],default=dni),       
-    Field('cuil',requires=[IS_UPPER(),IS_NOT_EMPTY(error_message='El campo no  puede estar vacio')]),           
+    Field('cuil',requires=[IS_UPPER(),IS_NOT_EMPTY(error_message='El campo no  puede estar vacio')]),
+    Field('genero',label='genero',requires=IS_IN_SET(["Masculino","Femenino"],error_message='Debe Elegir el Genero'),),          
     Field('apellido',requires=[IS_UPPER(),IS_NOT_EMPTY(error_message='El campo no  puede estar vacio')]),
     Field('nombre',requires=[IS_UPPER(),IS_NOT_EMPTY(error_message='El campo no  puede estar vacio')]),
     Field('domicilio',requires=IS_UPPER()),
     Field('f_nacimiento',requires=[IS_NOT_EMPTY(error_message='El campo no puede estar vacio ej: 20/02/2000'), IS_DATE(format='%d/%m/%Y'),]),
     Field('g_sanguineo',requires=IS_IN_SET(["RH+","RH-"],error_message='Error elija el grupo sanguineo'),),
-    Field('curso',requires=IS_IN_SET(["1","2","3"],error_message='Error elija el curso'),),
+    Field('curso',requires=IS_IN_SET(["1","2","3"],error_message='Error elija el curso'),default="1"),
     Field('f_ingreso', requires=[IS_NOT_EMPTY(), IS_DATE(format='%d/%m/%Y')]),
     Field('celu','integer'),
     Field('fijo','integer'),
@@ -72,7 +73,7 @@ def form():
     Field('tel_tutor','integer'),
     Field('formacion',label='Formacion',requires=IS_IN_SET(["Esc. Cadetes","S.Penitenciario"],error_message='Error elija a que formacion pertenece')),
     Field('alergias','text'), 
-    Field('estado',label='Estado',requires=IS_IN_SET(["ACTIVO","INACTIVO","BAJA"],error_message='Error elija el estado'),default="ACTIVO"),
+    Field('estado',label='Estado',requires=IS_IN_SET(["ACTIVO","BAJA POR SACIONES","BAJA VONLUNTARIA","RECIBIDO"],error_message='Error elija el estado'),default="ACTIVO"),
         ) 
     
     if form.accepts(request,session):   
@@ -81,19 +82,19 @@ def form():
                 estado=form.vars.estado,domicilio=form.vars.domicilio,f_nacimiento=form.vars.f_nacimiento,
                 g_sanguineo=form.vars.g_sanguineo,curso=form.vars.curso,f_ingreso=form.vars.f_ingreso,
                 celu=form.vars.celu,fijo=form.vars.fijo,tutor=form.vars.tutor,tel_tutor=form.vars.tel_tutor,
-                formacion=form.vars.formacion,alergias=form.vars.alergias
+                formacion=form.vars.formacion,alergias=form.vars.alergias,genero=form.vars.genero
 
                 )
- 
-
         response.flash = 'formulario aceptado'
-        redirect(URL(c='nuevo',f='cargado'))
+        redirect(URL(c='nuevo',f='cargado'))      
+            
 
     elif form.errors:
             response.flash = 'el formulario tiene errores'
     else:
             response.flash = 'por favor complete el formulario'  
     return dict(form=form)
+    
 def cargado():
 	return dict()
 def pregunta():

@@ -112,6 +112,7 @@
 'DB': 'BDD',
 'db': 'bdd',
 'DB Model': 'Modelo BDD',
+'Debe Elegir el Genero': 'Debe Elegir el Genero',
 'defines tables': 'define tablas',
 'Delete': 'Eliminar',
 'delete': 'eliminar',
