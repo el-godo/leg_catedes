@@ -25,18 +25,12 @@ def totales():
 	s2b=0	#contador de total de cadetes del servicio de 2 año de baja
 	s3b=0	#contador de total de cadetes del servicio de 3 año de baja
 	atie=0   # Acumulador total de inscriptos en el establecimiento
-	ta=0
-
-
- 
-
-
-
-
+	ta=0	
 
 
 	return dict(set_leg=set_leg,ctp=ctp,p1=p1,p2=p2,p3=p3,p1b=p1b,p2b=p2b,p3b=p3b,s1b=s1b,s2b=s2b,s3b=s3b,
 		s1=s1,s2=s2,s3=s3,atie=atie,ta=ta)	
+
 
 def sin_autorizacion():
 	return dict()
@@ -77,8 +71,6 @@ def cant_n_medicas():
 	anmm=0#acumulador de notas por mes
 	anaa=0 #acumulador de notas medicas roposo absoluto del anio
 	anra=0 #acumulador de notas medicas roposo relativo del anio
-
-
 	nmgm=0#la nota mas grande del mes
 	nmga=0# La nota mas grande del año
 	cpa=0#compara nota del año

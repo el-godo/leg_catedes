@@ -147,6 +147,7 @@ db.define_table('legajo',
                   uploadfolder=URL('static','fotos')),
     Field('dni','integer'),       
     Field('cuil'),
+    Field('sexo',label='genero',requires=IS_IN_SET(["Masculino","Femenino"]),),
     Field('apellido',requires=IS_UPPER()),
     Field('nombre',requires=IS_UPPER()),
     Field('domicilio',requires=IS_UPPER()),
@@ -160,9 +161,9 @@ db.define_table('legajo',
     Field('tel_tutor','integer'),
     Field('formacion',label='Formacion',requires=IS_IN_SET(["Esc. Cadetes","S.Penitenciario"]),), 
     Field('alergias','text'), 
-    Field('estado',label='Estado',requires=IS_IN_SET(["ACTIVO","INACTIVO","BAJA"]),),
+    Field('estado',label='Estado',requires=IS_IN_SET(["ACTIVO","BAJA POR SACIONES","BAJA VONLUNTARIA","RECIBIDO"]),),
+    )    
 
-    )
 
 db.define_table('sanciones',
     Field('dni','integer'),
@@ -196,7 +197,6 @@ db.define_table('muestra',
     Field('cant_ingreso','integer'),
     Field('cant_baja','integer'),
     )
-
 
 #------------------------------------------------
 #---------------Validadores------------------------

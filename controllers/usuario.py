@@ -1,10 +1,11 @@
 
-#--------------------------------------------------------------------
+#-----------------------------------------------------------------------------------------------
 
 @auth.requires_login()
 @auth.requires(auth.has_membership(role = 'Super')|auth.has_membership(role = 'Jefe de cuerpo'))
 def menu():
     return dict()
+@auth.requires(auth.has_membership(role = 'Super')|auth.has_membership(role = 'Jefe de cuerpo'))   
 def editar():
     #--Atrapo el id del usuario
     usu = int(request.args[0])
@@ -12,10 +13,8 @@ def editar():
     #--Creo un set para traer los datos del id pasado
     set_usu = db(db.auth_user.id == usu).select()
 
-
     #--Construyo mi SQLFORM
-    formulario = SQLFORM(db.auth_user,usu,showid=False)
-    
+    formulario = SQLFORM(db.auth_user,usu,showid=False)    
 
     if formulario.process().accepted:
         redirect(URL(c='default',f='index'))
@@ -25,13 +24,11 @@ def editar():
     else:
         response.flash = 'Completar el formulario'
 
-
-
     return dict(usu=usu, set_usu=set_usu, formulario=formulario)
 
 
 @auth.requires_login()
-@auth.requires(auth.has_membership('Administrador'))
+@auth.requires(auth.has_membership('Super')|auth.has_membership(role = 'Jefe de cuerpo'))
 def nuevo():
 
      #--Armo el formulario para la carga de los usuarios
@@ -46,7 +43,7 @@ def nuevo():
     return dict(formulario=formulario)
     
 
-@auth.requires(auth.has_membership('Administrador'))
+@auth.requires(auth.has_membership(role = 'Super')|auth.has_membership(role = 'Jefe de cuerpo'))
 def eliminar():
     #--Atrapo el id del usuario
     usu = int(request.args[0])
@@ -67,9 +64,11 @@ def eliminar():
     else:
         response.flash = 'Completar el formulario'
 
-
-
     return dict(usu=usu, set_usu=set_usu, formulario=formulario)
+
 
 def sin_autorizacion():
     return dict()
+    
+
+

@@ -1,0 +1,13 @@
+{{extend 'layout1.html'}}
+{{block header}}
+<h2>Policía de Catamarca | Sistema Escuela de Cadetes</h2>
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a href="{{=URL(c='default',f='index')}}">Home</a>
+    </li>
+    <li class="breadcrumb-item active">
+        <strong> Form</strong>
+    </li>
+</ol>
+{{end}}
+{{= formulario}}
