@@ -1,0 +1,91 @@
+<style>
+    
+    #dni__error{
+       background: red;
+       color:white;
+    }
+    #congreso__error{
+        background: red;
+       color:white;
+
+    }  
+    
+</style>
+{{extend 'layout1.html'}}
+
+{{block header}}
+    
+{{end}}
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+       
+            <div class="col-lg-12">
+
+                
+                            
+                       
+                        <div class="ibox-content" id="contiene">
+                            {{=form.custom.begin}}
+                            <div class="row">
+                                <div class="col-md-2">
+                                    
+
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label><strong>Dni:</strong></label>
+                                        {{form.custom.widget.dni["_style"] = "type=number"}}
+                                        {{=form.custom.widget.dni}}
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label><strong>Inscripcion al 1º Congreso:</strong></label>
+                                        {{form.custom.widget.congreso}}
+                                        {{=form.custom.widget.congreso}}
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    
+                                    
+                                </div>  
+                                
+                                
+                            </div> 
+                            <div class="row">
+
+                                <div class="col-md-2">
+                                    </div> 
+                                <div class="col-md-4">          
+                                                  
+                                        
+                                    <div class="form-group" align="">                  
+                            
+                            
+                            <button type="submit" class="btn btn-info ">Guardar</button>
+                            
+                            
+                            {{=form.custom.end}}
+                                     </div> 
+                                      </div> 
+
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+            
+   </div>
+
+
+
+
+
+
+
+
+
+
+

@@ -9,7 +9,6 @@ def listado():
 	return dict()
 def sanciones():
 	dni=request.args[0]
-
 	set_todo=db(db.sanciones.dni==dni).select()
 	mf = json(set_todo)
 	return dict(set_todo=set_todo,mf=mf,dni=dni)	

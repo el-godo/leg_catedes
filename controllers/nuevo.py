@@ -73,10 +73,12 @@ def form():
     Field('tel_tutor','integer'),
     Field('formacion',label='Formacion',requires=IS_IN_SET(["Esc. Cadetes","S.Penitenciario"],error_message='Error elija a que formacion pertenece')),
     Field('alergias','text'), 
-    Field('estado',label='Estado',requires=IS_IN_SET(["ACTIVO","BAJA POR SACIONES","BAJA VONLUNTARIA","RECIBIDO"],error_message='Error elija el estado'),default="ACTIVO"),
+    Field('estado',label='Estado',requires=IS_IN_SET(["ACTIVO"],error_message='Error elija el estado'),default="ACTIVO"),
         ) 
-    
-    if form.accepts(request,session):   
+
+    if form.accepts(request,session): 
+       
+        redirect(URL(c='nuevo',f='cargado')) 
         db.legajo.insert(cuil=form.vars.cuil,foto=form.vars.foto,dni=form.vars.dni,nombre=form.vars.nombre,
             apellido=form.vars.apellido,
                 estado=form.vars.estado,domicilio=form.vars.domicilio,f_nacimiento=form.vars.f_nacimiento,
@@ -86,7 +88,7 @@ def form():
 
                 )
         response.flash = 'formulario aceptado'
-        redirect(URL(c='nuevo',f='cargado'))      
+             
             
 
     elif form.errors:
@@ -108,6 +110,23 @@ def download():
     return response.download(request, db)
 def sin_autorizacion():
     return dict()
+
+def form_congreso():    
+    form=SQLFORM.factory(       
+    Field('dni',"integer",label='DNI',requires=([IS_LENGTH(8,error_message='ingrese un dni valido'),IS_INT_IN_RANGE(00000000,99999999,
+         error_message='ingrese un dni valido'),IS_NOT_EMPTY(error_message='no puede estar vacío')])),
+    Field('congreso',requires=IS_IN_SET(["I CONGRESO DE CIENCIAS CRIMINALISTICAS DEL NOA- 5,6 DE SEPTIEMBRE -"],error_message='Seleccione el evento'),default="I CONGRESO DE CIENCIAS CRIMINALISTICAS DEL NOA- 5,6 DE SEMTIEMBRE -",label="Inscripcion al Congreso"),
+
+            )
+    if form.accepts(request,session):
+        response.flash = 'formulario aceptado'
+        redirect(URL(c='criminalistica',f='validacion',args=[form.vars.dni,form.vars.congreso]))
+    elif form.errors:
+            response.flash = 'el formulario tiene errores'        
+    else:
+            response.flash = 'por favor complete el formulario' 
+
+    return dict(form=form)
 
     
 

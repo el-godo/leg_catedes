@@ -219,6 +219,7 @@
 'Ingrese el DNI': 'Ingrese el DNI',
 'Ingrese la cantidad de dias con numeros': 'Ingrese la cantidad de dias con numeros',
 'Ingrese su DNI': 'Ingrese su DNI',
+'ingrese un dni valido': 'ingrese un dni valido',
 'insert new': 'inserte nuevo',
 'insert new %s': 'inserte nuevo %s',
 'Installed applications': 'Aplicaciones instaladas',
