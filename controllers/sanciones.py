@@ -2,7 +2,7 @@ from gluon.serializers import json
 @auth.requires(auth.has_membership(role = 'Super')|auth.has_membership(role = 'Jefe de cuerpo')|auth.has_membership(role = 'Oficiales')|auth.has_membership(role = 'Director')) 
 
 def listado():
-	set_todo=db((db.legajo.estado!="INACTIVO")&(db.legajo.estado!="BAJA")).select()
+	set_todo=db((db.legajo.estado!="INACTIVO")&(db.legajo.estado!="BAJA")&(db.legajo.estado!="BAJA_POR_SACIONES")&(db.legajo.estado!="BAJA VONLUNTARIA")&(db.legajo.estado!="RECIBIDO")).select()
 	mf = json(set_todo)
 	return dict(set_todo=set_todo,mf=mf)
 
@@ -20,34 +20,43 @@ def sancionar():
 	set_name=db(db.legajo.dni==dni).select().first()
 	nombre=set_name.nombre
 	apellido=set_name.apellido	
+        quien=auth.user.id            #atrapo el usuario logueado
+        user=db(db.auth_user.id==quien).select().first()#pregunto quien esta logueado
+        user_nom=user.first_name
+        user_ape=user.last_name
+        quien=user_nom+" "+user_ape
 	form=SQLFORM.factory(
 	Field('dni','integer',default=dni),
     Field('apellido',requires=IS_UPPER(),default=apellido),
     Field('nombre',requires=IS_UPPER(),default=nombre),  
     Field('memorandum',requires=[IS_NOT_EMPTY(error_message='El campo no puede estar vacio '),IS_UPPER()]),
-    Field('fecha','datetime',label="Fecha ",requires=[IS_NOT_EMPTY(error_message='El campo no puede estar vacio, ej: 20/02/2000'), IS_DATE(format='%d/%m/%Y'),]),
+    Field('fecha','date',label="Fecha ",requires=[IS_NOT_EMPTY(error_message='El campo no puede estar vacio, ej: 20/02/2000'), IS_DATE(format='%d/%m/%Y'),]),
     Field('dias','integer'),
-    Field('articulo',requires=[IS_NOT_EMPTY(error_message='El campo no puede estar vacio '),IS_UPPER()]),
     Field('encuadramiento','text',requires=IS_UPPER()),    
+    Field('articulo',requires=[IS_NOT_EMPTY(error_message='El campo no puede estar vacio '),IS_UPPER()]),    
     Field('descripcion','text',requires=IS_UPPER()),
-    Field('sancionador',requires=[IS_NOT_EMPTY(error_message='El campo no puede estar vacio '),IS_UPPER()]),
-    Field('fecha_cumpli','datetime',label="Fecha de cumplimiento "
+    #Field('sancionador',requires=[IS_NOT_EMPTY(error_message='El campo no puede estar vacio '),IS_UPPER()],default=quien),
+    Field('fecha_cumpli','date',label="Fecha de cumplimiento "
     	,requires=[IS_NOT_EMPTY(error_message='El campo no puede estar vacio, ej: 20/02/2000 '), IS_DATE(format='%d/%m/%Y'),]),
-    Field('visacion',requires=[IS_NOT_EMPTY(error_message='El campo no puede estar vacio  '),IS_UPPER()]),
-
-    )
+    #Field('estado',requires=IS_IN_SET(["No Visado","Visado","Cancelado"])),
+    #Field('Visado_por')
+    )        
+    
+    
     	if form.accepts(request,session):
-    		db.sanciones.insert(dni=dni,nombre=nombre,apellido=apellido,memorandum=form.vars.memorandum,fecha=form.vars.fecha,dias=form.vars.dias,
-    			encuadramiento=form.vars.encuadramiento,articulo=form.vars.articulo,descripcion=form.vars.descripcion,sancionador=form.vars.sancionador,
-    			fecha_cumpli=form.vars.fecha_cumpli,visacion=form.vars.visacion
+    	   db.sanciones.insert(dni=dni,nombre=nombre,apellido=apellido,memorandum=form.vars.memorandum,fecha=form.vars.fecha,dias=form.vars.dias,
+    	 		encuadramiento=form.vars.encuadramiento,articulo=form.vars.articulo,descripcion=form.vars.descripcion,sancionador=quien,
+    	 		fecha_cumpli=form.vars.fecha_cumpli,estado="No Visado"
     			)
-    		redirect(URL(c='sanciones',f='mensaje',args=[dni]))
+
+
+    	   redirect(URL(c='sanciones',f='mensaje',args=[dni]))
     	elif form.errors:
         	response.flash = 'el formulario tiene errores'
     	else:
         	response.flash = 'por favor complete el formulario'		
 
-	return dict(form=form,dni=dni,nombre=nombre,apellido=apellido)
+	return dict(form=form,dni=dni,nombre=nombre,apellido=apellido,user_ape=user_ape,user_nom=user_nom,quien=quien)
 
 def mensaje():
     dni=request.args[0]
@@ -100,5 +109,19 @@ def editar():
 	return dict(form=form,dni=dni,set_sancion=set_sancion,nombre=nombre,apellido=apellido,memorandum=memorandum,fecha=fecha,
         dias=dias,articulo=articulo,encuadramiento=encuadramiento,descripcion=descripcion,sancionador=sancionador,
         fecha_cumpli=fecha_cumpli,visacion=visacion)
+
+
+def lista_baja():
+   
+    set_todo=db((db.legajo.estado!="RECIBIDO")).select()
+    mf = json(set_todo)
+    return dict(set_todo=set_todo,mf=mf)
+
+  
+
+def baja():
+
+    return dict()    
+
 def sin_autorizacion():
     return dict()

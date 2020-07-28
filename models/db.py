@@ -151,17 +151,18 @@ db.define_table('legajo',
     Field('apellido',requires=IS_UPPER()),
     Field('nombre',requires=IS_UPPER()),
     Field('domicilio',requires=IS_UPPER()),
-    Field('f_nacimiento','datetime'),
+    Field('f_nacimiento','date'),
     Field('g_sanguineo',requires=IS_IN_SET(["RH+","RH-"]),),
     Field('curso',requires=IS_IN_SET(["1","2","3"]),),
-    Field('f_ingreso','datetime'),
+    Field('f_ingreso','date'),
     Field('celu','integer'),
     Field('fijo','integer'),
     Field('tutor',requires=IS_UPPER()),
     Field('tel_tutor','integer'),
     Field('formacion',label='Formacion',requires=IS_IN_SET(["Esc. Cadetes","S.Penitenciario"]),), 
     Field('alergias','text'), 
-    Field('estado',label='Estado',requires=IS_IN_SET(["ACTIVO","BAJA POR SACIONES","BAJA VONLUNTARIA","RECIBIDO"]),),
+    Field('estado',label='Estado',requires=IS_IN_SET(["ACTIVO","BAJA POR SACIONES","BAJA VONLUNTARIA","RECIBIDO","INACTIVO"]),),
+
     )    
 
 
@@ -178,8 +179,25 @@ db.define_table('sanciones',
     Field('descripcion','text'),
     Field('sancionador',requires=IS_UPPER()),
     Field('fecha_cumpli','datetime'),
-    Field('visacion',requires=IS_UPPER()),
-    )
+    Field('estado',requires=IS_IN_SET(["No Visado","Visado","Cancelado"])),
+    Field('Visado_por'),
+    Field('fecha_visado','datetime',label="Fecha de Visacion"),
+    )        
+    
+    
+   
+db.define_table('baja',
+    Field('dni','integer'),
+    Field('apellido',requires=IS_UPPER()),
+    Field('nombre',requires=IS_UPPER()),
+    Field('memorandum',requires=IS_UPPER()),
+    Field('fecha','datetime',label="fecha de ingreso de nota",
+        requires=[IS_NOT_EMPTY(error_message='El campo no puede estar vacio ej: 20/02/2000'), IS_DATE(format='%d/%m/%Y'),]),
+    Field('encuadramiento','text'),
+    Field('articulo',requires=IS_UPPER()),
+    Field('descripcion','text'),
+    Field('estado',requires=IS_IN_SET(["No Visado","Visado","Cancelado"])),
+    Field('Visado_por'))
 
 
 db.define_table('n_medicas',
@@ -192,8 +210,7 @@ db.define_table('n_medicas',
     Field('t_reposo',requires=IS_IN_SET(["ABSOLUTO","RELATIVO"]),),
     Field('medico',requires=IS_UPPER(),label="medico otorgante"), 
     Field('fecha_c','datetime',label="fecha de cumplimiento"),
-
-)
+    )
 
 
 

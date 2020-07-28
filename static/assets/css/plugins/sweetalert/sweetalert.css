@@ -19,7 +19,7 @@ body.stop-scrolling {
 .sweet-alert {
   background-color: white;
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  width: 478px;
+  width: 700px;
   padding: 17px;
   border-radius: 5px;
   text-align: center;
@@ -178,7 +178,7 @@ body.stop-scrolling {
     .sweet-alert button:active {
       background-color: #81ccee; }
     .sweet-alert button.cancel {
-      background-color: #D0D0D0; }
+      background-color: #B21C35; }
       .sweet-alert button.cancel:hover {
         background-color: #c8c8c8; }
       .sweet-alert button.cancel:active {
