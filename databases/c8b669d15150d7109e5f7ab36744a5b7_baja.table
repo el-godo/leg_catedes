@@ -39,7 +39,7 @@ I00
 sg10
 S'text'
 p15
-ssS'visado_por'
+ssS'estado'
 p16
 (dp17
 g4
@@ -47,7 +47,7 @@ I512
 sg5
 I00
 sg6
-I11
+I10
 sg7
 S'CHAR(512)'
 p18
@@ -153,7 +153,7 @@ sg9
 I00
 sg10
 g11
-ssS'estado'
+ssS'visado_por'
 p39
 (dp40
 g4
@@ -161,7 +161,7 @@ I512
 sg5
 I00
 sg6
-I10
+I11
 sg7
 S'CHAR(512)'
 p41

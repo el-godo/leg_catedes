@@ -14,13 +14,27 @@
         font-size:14px;background: red;}
     #fecha_cumpli__error{color:#f3f3f4;
         font-size:14px;background: red;}
-    #visacion__error{color:#f3f3f4;
-        font-size:14px;background: red;}
-  
+    
   
     
 
 </style>
+ <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Policía de Catamarca | Sistema de Gestión Integral D-4</title>
+
+    <link href="{{=URL('static', 'assets/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{=URL('static', 'assets/font-awesome/css/font-awesome.css' ) }}" rel="stylesheet">
+
+    <link href="{{=URL('static', 'assets/css/animate.css' ) }}" rel="stylesheet">
+    <link href="{{=URL('static', 'assets/css/style.css' ) }}" rel="stylesheet">
+    <link rel="shortcut icon" href="{{=URL('static','images/favicon1.ico')}}" type="image/x-icon">
+    <link rel="stylesheet" href="{{=URL('static','js/calendario/jquery-ui-1-12-0.css')}}">
+    <script src="{{=URL('static','js/calendario/jquery.js')}}"></script>
+    <script src="{{=URL('static','js/calendario/jquery-ui.js')}}"></script>
+
+
 
 {{extend 'layout1.html'}}
 {{block header}}
@@ -131,70 +145,22 @@
 
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label><strong>Sanciono:</strong></label>
-                                 {{form.custom.widget.sancionador["_style"] = "text-transform:uppercase"}}
-                                 {{=form.custom.widget.sancionador}}
-                                
-                                
-                            </div>
-                        </div>
+                        
 
                         <div class="col-md-6">
                             <div class="form-group">
                                 
                                 <label><strong>Fecha de cumplimiento:</strong></label>
-                                 {{form.custom.widget.fecha_cumpli["_style"] = "text-transform:uppercase"}}
-                                 {{=form.custom.widget.fecha_cumpli}}
-                                
-                                
-                                
+                                 {{form.custom.widget.fecha_cumpli}}
+                                 {{=form.custom.widget.fecha_cumpli}}                            
+                                                                
                             </div>            
                                                                   
                         </div>   
+
                     </div>        
-                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                 <label><strong>Visado Por:</strong></label>
+                     
                                 
-                                 {{form.custom.widget.visacion["_style"] = "text-transform:uppercase"}}
-                                 {{=form.custom.widget.visacion}}
-                                
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                               
-                            </div>            
-                                                                  
-                        </div>   
-                    </div>        
-
-
-                    
-                 
-
-
-
-
-
-
-
-
-
-
-
-
-               
-
-              
-            
-                
-                
-                
                 <div class="form-group">
                     
                     
@@ -209,8 +175,3 @@
         </div>
     </div>
     
-
- 
-
-
-

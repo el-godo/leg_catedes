@@ -64,6 +64,7 @@ def mensaje():
     return dict(dni=dni)
 @auth.requires(auth.has_membership(role = 'Super')|auth.has_membership(role = 'Jefe de cuerpo')|auth.has_membership(role = 'Oficiales')) 
 def editar():
+
 	ide=request.args[0]
 	set_sancion=db(db.sanciones.id==ide).select().first()
         dni=set_sancion.dni
@@ -75,9 +76,9 @@ def editar():
         articulo=set_sancion.articulo
         encuadramiento=set_sancion.encuadramiento
         descripcion=set_sancion.descripcion
-        sancionador=set_sancion.sancionador
+        quien=set_sancion.sancionador
         fecha_cumpli=set_sancion.fecha_cumpli
-        visacion=set_sancion.visacion
+
         form=SQLFORM.factory(
         Field('dni','integer',default=dni),
         Field('apellido',requires=IS_UPPER(),default=apellido),
@@ -88,16 +89,15 @@ def editar():
         Field('articulo',requires=[IS_NOT_EMPTY(error_message='El campo no puede estar vacio '),IS_UPPER()],default=articulo),
         Field('encuadramiento','text',requires=IS_UPPER(),default=encuadramiento),    
         Field('descripcion','text',requires=IS_UPPER(),default=descripcion),
-        Field('sancionador',requires=[IS_NOT_EMPTY(error_message='El campo no puede estar vacio '),IS_UPPER()],default=descripcion),
+        Field('sancionador',requires=[IS_NOT_EMPTY(error_message='El campo no puede estar vacio '),IS_UPPER()],default=quien),
         Field('fecha_cumpli','datetime',label="Fecha de cumplimiento "
             ,requires=[IS_NOT_EMPTY(error_message='El campo no puede estar vacio, ej: 20/02/2000 '), IS_DATE(format='%d/%m/%Y'),],default=fecha_cumpli),
-        Field('visacion',requires=[IS_NOT_EMPTY(error_message='El campo no puede estar vacio  '),IS_UPPER()],default=visacion),
-
         )
+        
         if form.accepts(request,session):
             set_sancion.update_record(dni=dni,nombre=nombre,apellido=apellido,memorandum=form.vars.memorandum,fecha=form.vars.fecha,dias=form.vars.dias,
                 encuadramiento=form.vars.encuadramiento,articulo=form.vars.articulo,descripcion=form.vars.descripcion,sancionador=form.vars.sancionador,
-                fecha_cumpli=form.vars.fecha_cumpli,visacion=form.vars.visacion
+                fecha_cumpli=form.vars.fecha_cumpli,estado="No Visado"
                 )
             redirect(URL(c='sanciones',f='mensaje',args=[dni]))
 
@@ -107,8 +107,7 @@ def editar():
             response.flash = 'por favor complete el formulario'     
 
 	return dict(form=form,dni=dni,set_sancion=set_sancion,nombre=nombre,apellido=apellido,memorandum=memorandum,fecha=fecha,
-        dias=dias,articulo=articulo,encuadramiento=encuadramiento,descripcion=descripcion,sancionador=sancionador,
-        fecha_cumpli=fecha_cumpli,visacion=visacion)
+        dias=dias,articulo=articulo,encuadramiento=encuadramiento,descripcion=descripcion,quien=quien,fecha_cumpli=fecha_cumpli,)
 
 
 def lista_baja():
