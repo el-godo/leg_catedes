@@ -24,6 +24,7 @@ div.dataTables_wrapper div.dataTables_paginate {
     list-style: none;
     border-radius: .25rem;
 }
+#visado{color blue}
 
 </style>
 
@@ -103,6 +104,22 @@ div.dataTables_wrapper div.dataTables_paginate {
           <h5 class="font-bold"><a href="{{=URL(c='estadisticas',f='menu')}}" style="color: #FFF">Estadisticas</a></h5>
         </div>
       </div>  
+    </div>
+  </div>
+  
+  
+  <div class="col-lg-2">
+    <div class="widget style1 blue-bg">
+      <div class="row vertical-align">
+        <div class="col-2">
+
+          <i class="fa fa-vine  fa-2x" aria-hidden="true" id="visado"></i>
+          
+        </div>
+        <div class="col-10 text-right">
+          <h5 class="font-bold"><a href="{{=URL(c='sanciones',f='visados')}}" style="color: #FFF " id="visado">Visacion</a></h5>
+        </div>
+      </div>
     </div>
   </div>
 

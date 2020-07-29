@@ -115,7 +115,10 @@ def lista_baja():
     set_todo=db((db.legajo.estado!="RECIBIDO")).select()
     mf = json(set_todo)
     return dict(set_todo=set_todo,mf=mf)
-@auth.requires(auth.has_membership(role = 'Super')|auth.has_membership(role = 'Jefe de cuerpo'))     
+@auth.requires(auth.has_membership(role = 'Super')|auth.has_membership(role = 'Jefe de cuerpo')) 
+
+def visados():
+    return dict()    
 def vis_sancion():
     
    

@@ -1,0 +1,100 @@
+{{extend 'layout1.html'}}
+
+
+<style>
+
+  div.dataTables_wrapper div.dataTables_info {
+    padding-top: 50px;
+    white-space: nowrap;
+}
+
+div.dataTables_wrapper div.dataTables_paginate {
+    margin: 0;
+    white-space: nowrap;
+    text-align: right;
+    padding-top: 70px;
+
+
+}
+
+.pagination {
+    display: -ms-flexbox;
+    display: inline-flex;
+    padding-left: 0;
+    list-style: none;
+    border-radius: .25rem;
+}
+#visado{color blue}
+
+</style>
+
+
+
+
+{{block header}}
+    <h2>Página de Inicio</h2>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="{{=URL(c='default',f='index')}}">Home</a>
+      </li>
+      <li class="breadcrumb-item active">
+        <strong>Inicio</strong>
+      </li>
+    </ol>
+{{end}}
+
+  
+
+
+
+<div class="row animated fadeInRightBig">
+  <div class="col-lg-2">
+    <div class="widget style1 navy-bg">
+      <div class="row vertical-align">
+        <div class="col-2">
+
+          <i class=" fa fa-folder-open fa-2x"></i>
+
+          
+        </div>
+        <div class="col-10 text-right">
+          <h5 class="font-bold"><a href="{{=URL(c='nuevo',f='check')}}" style="color: #FFF">Visado de Sanciones</a></h5>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-2">
+    <div class="widget style1 yellow-bg">
+      <div class="row vertical-align">
+        <div class="col-2">
+          <i class="fa fa-male fa-2x"></i>
+        </div>
+
+        <div class="col-10 text-right">
+
+          <h5 class="font-bold"><a href="{{=URL(c='medica',f='medica')}}" style="color: #FFF">Visado de Bajas</a></h5>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+      
+  </div>
+
+   <div class="col-lg-2">
+  
+  </div>
+  <div class="col-lg-2">
+    
+  </div>
+  
+  <div class="col-lg-2">
+   
+  </div>
+</div>
+
+  
+
+<br><br>
+
+<br>
