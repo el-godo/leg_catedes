@@ -75,9 +75,12 @@ div.dataTables_wrapper div.dataTables_paginate {
             <th>Nombre</th>           
             
             <th>Cantidad de Dias </th>
+              <th>articulos</th>
              
              
              <th>Sancionador</th> 
+             <th>Fecha de cumplimiento</th> 
+             <th>estado</th> 
                 
             <th></th>
 
@@ -135,11 +138,12 @@ div.dataTables_wrapper div.dataTables_paginate {
       "columns":[
         
         {name:"apellido", data:"apellido"},        
-        {name:"Nombre", data:"Nombre"},
+        {name:"nombre", data:"nombre"},
         {name:"dias", data:"dias"},
         {name:"articulo", data:"articulo"},
         {name:"sancionador", data:"sancionador"},
         {name:"fecha_cumpli", data:"fecha_cumpli"},
+        {name:"estado", data:"estado"},
         
 
 
@@ -150,7 +154,7 @@ div.dataTables_wrapper div.dataTables_paginate {
 
         $('#myTable tbody').on( 'click', 'button.editar', function(){
                 var data = table.row( $(this).parents('tr')).data();
-                var url = '{{=URL(c='sanciones', f='visa_sancion',args=)}}' + '/' + data.id; 
+                var url = '{{=URL(c='sanciones', f='editar')}}' + '/' + data.id; 
                 window.location = url
                
                 
