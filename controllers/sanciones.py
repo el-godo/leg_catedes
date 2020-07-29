@@ -2,14 +2,14 @@ from gluon.serializers import json
 @auth.requires(auth.has_membership(role = 'Super')|auth.has_membership(role = 'Jefe de cuerpo')|auth.has_membership(role = 'Oficiales')|auth.has_membership(role = 'Director')) 
 
 def listado():
-	set_todo=db((db.legajo.estado!="INACTIVO")&(db.legajo.estado!="BAJA")&(db.legajo.estado!="BAJA_POR_SACIONES")&(db.legajo.estado!="BAJA VONLUNTARIA")&(db.legajo.estado!="RECIBIDO")).select()
+	set_todo=db((db.legajo.estado!="INACTIVO")&(db.legajo.estado!="BAJA")&(db.legajo.estado!="LIBRE")&(db.legajo.estado!="BAJA_POR_SACIONES")&(db.legajo.estado!="BAJA VONLUNTARIA")&(db.legajo.estado!="RECIBIDO")).select()
 	mf = json(set_todo)
 	return dict(set_todo=set_todo,mf=mf)
 
 	return dict()
 def sanciones():
 	dni=request.args[0]
-	set_todo=db(db.sanciones.dni==dni).select()
+	set_todo=db((db.sanciones.dni==dni)&(db.sanciones.estado!="Cancelado")).select()
 	mf = json(set_todo)
 	return dict(set_todo=set_todo,mf=mf,dni=dni)	
 
@@ -115,9 +115,41 @@ def lista_baja():
     set_todo=db((db.legajo.estado!="RECIBIDO")).select()
     mf = json(set_todo)
     return dict(set_todo=set_todo,mf=mf)
+@auth.requires(auth.has_membership(role = 'Super')|auth.has_membership(role = 'Jefe de cuerpo'))     
+def vis_sancion():
+    
+   
+    set_todo=db((db.sanciones.estado=="No Visado")&(db.sanciones.estado!="Cancelado")&(db.sanciones.estado!="Visado")).select()
+    mf = json(set_todo)
+
+
+    return dict(mf=mf,set_todo=set_todo)    
+def visa_sancion():
+    quien=auth.user.id            #atrapo el usuario logueado
+    user=db(db.auth_user.id==quien).select().first()#pregunto quien esta logueado
+    user_nom=user.first_name
+    user_ape=user.last_name
+    quien=user_nom+" "+user_ape
+    ide=request.args[0]
+    set_sancion=db(db.sanciones.id==ide).select().first()
+    form=SQLFORM.factory(
+        Field('estado',requires=IS_IN_SET(["No Visado","Visado","Cancelado"]),default="No Visado"),
+        Field('fecha_visado','datetime',label="Fecha de Visacion"),)
+    if form.accepts(request,session):
+        set_sancion.update_record(estado=form.vars.estado,fecha_visado=form.vars.fecha_visado,Visado_por=quien)
+        redirect(URL(c='sanciones',f='mensaje_sanciones'))
+    elif form.errors:
+            response.flash = 'el formulario tiene errores'
+    else:
+            response.flash = 'por favor complete el formulario'  
+
+
+    return dict(set_sancion=set_sancion,form=form,quien=quien)
+def mensaje_sanciones():
+    return dict()
 
   
-
+@auth.requires(auth.has_membership(role = 'Super')|auth.has_membership(role = 'Jefe de cuerpo')|auth.has_membership(role = 'Oficiales')) 
 def baja():
 
     return dict()    

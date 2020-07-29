@@ -38,7 +38,7 @@ div.dataTables_wrapper div.dataTables_paginate {
         <a href="{{=URL(c='default',f='index')}}">Home</a>
       </li>
       <li class="breadcrumb-item active">
-        <strong>Listado de Sanciones</strong>
+        <strong>Listado de Cadetes</strong>
       </li>
     </ol>
 {{end}}
@@ -51,14 +51,8 @@ div.dataTables_wrapper div.dataTables_paginate {
 
 <br><br>
 
-<h3 class="animated fadeInUp">Listado de Sanciones</h3>
+<h3 class="animated fadeInUp">Listado de Cadetes</h3>
 <br>
-<a class="btn btn-primary" href="{{=URL(c='sanciones',f='baja',args=dni)}}"role="button">Dar de Baja</a>
-<a class="btn btn-primary" href="{{=URL(c='sanciones',f='sancionar',args=dni)}}"role="button"> Ingresar Nueva Sancion</a>
-
-
-<a class="btn btn-primary" href="{{=URL(c='estadisticas',f='cant_sanciones',args=dni)}}"role="button">Total de Sanciones</a>
-
 
 
 <div class="ibox-content">
@@ -70,15 +64,11 @@ div.dataTables_wrapper div.dataTables_paginate {
       <table class="table table-striped" id="myTable">
         <thead>
           <tr>
-            
-            <th>Apellido</th>           
-            <th>Nombre</th>           
-            
-            <th>Cantidad de Dias </th>
-             
-             
-             <th>Sancionador</th> 
-                
+            <th>Dni</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Dias de Arresto </th>
+            <th>Sancionador</th>            
             <th></th>
 
           </tr>
@@ -133,24 +123,19 @@ div.dataTables_wrapper div.dataTables_paginate {
 
             
       "columns":[
-        
-        {name:"apellido", data:"apellido"},        
-        {name:"Nombre", data:"Nombre"},
+        {name:"dni", data:"dni"},
+        {name:"nombre", data:"nombre"},
+        {name:"apellido", data:"apellido"},
         {name:"dias", data:"dias"},
-        {name:"articulo", data:"articulo"},
         {name:"sancionador", data:"sancionador"},
-        {name:"fecha_cumpli", data:"fecha_cumpli"},
         
-
-
-        
-        {defaultContent: '<button type="button" class="editar btn btn-danger btn-xs" >Editar</button>'}
+        {defaultContent: '<button type="button" class="editar btn btn-warning btn-xs" >  Visar</button>'}
       ],  
         });
 
         $('#myTable tbody').on( 'click', 'button.editar', function(){
                 var data = table.row( $(this).parents('tr')).data();
-                var url = '{{=URL(c='sanciones', f='visa_sancion',args=)}}' + '/' + data.id; 
+                var url = '{{=URL(c='sanciones', f='visa_sancion')}}' + '/' + data.id;
                 window.location = url
                
                 

@@ -161,7 +161,7 @@ db.define_table('legajo',
     Field('tel_tutor','integer'),
     Field('formacion',label='Formacion',requires=IS_IN_SET(["Esc. Cadetes","S.Penitenciario"]),), 
     Field('alergias','text'), 
-    Field('estado',label='Estado',requires=IS_IN_SET(["ACTIVO","BAJA POR SACIONES","BAJA VONLUNTARIA","RECIBIDO","INACTIVO"]),),
+    Field('estado',label='Estado',requires=IS_IN_SET(["ACTIVO","BAJA POR SACIONES","BAJA VONLUNTARIA","RECIBIDO","INACTIVO","LIBRE"]),),
 
     )    
 
@@ -171,7 +171,7 @@ db.define_table('sanciones',
     Field('apellido',requires=IS_UPPER()),
     Field('nombre',requires=IS_UPPER()),
     Field('memorandum',requires=IS_UPPER()),
-    Field('fecha','datetime',label="fecha de ingreso de nota",
+    Field('fecha','datetime',label="fecha de la sancion",
         requires=[IS_NOT_EMPTY(error_message='El campo no puede estar vacio ej: 20/02/2000'), IS_DATE(format='%d/%m/%Y'),]),
     Field('dias','integer'),
     Field('encuadramiento','text'),

@@ -1,0 +1,127 @@
+
+{{extend 'layout1.html'}}
+
+
+<style>
+
+  div.dataTables_wrapper div.dataTables_info {
+    padding-top: 50px;
+    white-space: nowrap;
+}
+
+div.dataTables_wrapper div.dataTables_paginate {
+    margin: 0;
+    white-space: nowrap;
+    text-align: right;
+    padding-top: 70px;
+
+
+}
+
+.pagination {
+    display: -ms-flexbox;
+    display: inline-flex;
+    padding-left: 0;
+    list-style: none;
+    border-radius: .25rem;
+}
+
+</style>
+
+
+
+
+{{block header}}
+    <h2>Página de Inicio</h2>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="{{=URL(c='default',f='index')}}">Home</a>
+      </li>
+      <li class="breadcrumb-item active">
+        <strong>Listado de Cadetes</strong>
+      </li>
+    </ol>
+{{end}}
+
+
+                        
+
+                        <div class="row" id="tabla">
+        <div class="col-lg-6">
+
+
+
+
+            <table class="table table-bordered">
+                               
+                                   
+                                    <h1 align="center">Sancion</h1>
+                                <tr>
+                                    
+                                    
+                                    <th>Dni</th>
+                                    <td> {{=set_sancion.dni}}</td>
+                                </tr> 		
+                                <tr>
+                                   
+                                    <th>Apellido</th>
+                                    <td>  {{=set_sancion.apellido}}</td>
+                                </tr> 
+                                <tr>
+                                   <th>Nombre</th>
+                                   <td>{{=set_sancion.nombre}} </td>
+                                </tr>
+                                <tr> 
+                                   
+                                    <th>Memorandum</th>
+                                    <td> {{=set_sancion.memorandum}}</td>
+                                </tr>
+                                <tr> 
+                                   
+                                    <th>Fecha de sancion</th>
+                                    <td> {{=set_sancion.fecha.day}} /  {{=set_sancion.fecha.month}} /
+                                     {{=set_sancion.fecha.year}}</td>
+                                </tr>
+                                <tr>    
+                                    <th>Cant. de dias de Arresto</th>
+                                    <td>{{=set_sancion.dias}} </td>
+                                </tr>
+                                
+                                <tr>
+                                    <th>Encuadramiento</th>
+                                     <td>{{=set_sancion.encuadramiento}} </td>
+                                </tr> 
+                                 <tr>
+                                     <th>Aticulos</th>
+                                      <td> {{=set_sancion.articulo}}</td>
+
+                                </tr> 
+                                <tr>   
+                                    <th>descripcion</th>
+                                     <td>{{=set_sancion.descripcion}} </td>
+                                </tr>  
+                                <tr>  
+                                    <th>sancionador</th>
+                                    <td>{{=set_sancion.sancionador}}  </td>
+                                </tr>
+                            	
+                               
+                               
+
+
+
+
+                              
+
+                           
+                                    </tbody>
+                            </table>
+                            <div class="row animated fadeInRightBig">
+  <div class="col-lg-6">  
+  </div>                          
+
+                    
+
+{{=form}}
+ </div>   
+  </div>   
